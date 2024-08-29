@@ -39,7 +39,7 @@
                 android:id="@+id/app_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="App version : XX.XX.XX"
+                android:text="App version : 01.00.00"
                 android:textSize="14sp"
 
                 android:paddingBottom="8dp" />
@@ -130,7 +130,8 @@
                     android:src="@drawable/ic_arrow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
