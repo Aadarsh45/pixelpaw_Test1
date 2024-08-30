@@ -11,7 +11,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
-import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,29 +34,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private val sessionList = mutableListOf<Session>()
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-      sessionRecyclerView= findViewById(R.id.sessionRecyclerView)
-        val toggleButton: ImageButton = findViewById(R.id.toggle_button)
-
-// Initially hide the RecyclerView
-        sessionRecyclerView.visibility = View.GONE
-
-        toggleButton.setOnClickListener {
-            if (sessionRecyclerView.visibility == View.VISIBLE) {
-                // Hide the RecyclerView
-                sessionRecyclerView.visibility = View.GONE
-            } else {
-                // Show the RecyclerView
-                sessionRecyclerView.visibility = View.VISIBLE
-            }
-        }
-
 
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("SessionPrefs", Context.MODE_PRIVATE)
@@ -132,18 +111,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addCurrentSession() {
-        val timestamp = SimpleDateFormat("yyyy-MM-dd | HH:mm:ss", Locale.getDefault()).format(Date())
+        val timestamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
         val session = Session(timestamp, "App opened")
-        sessionList.add(0,session) // Add at the last of the list
+        sessionList.add(0, session) // Add at the beginning of the list
         saveSessionHistory() // Save updated list to SharedPreferences
         Log.d("MainActivity", "Session added: $session")
     }
 
     private fun loadSessionHistory() {
         val sessionSet = sharedPreferences.getStringSet("sessions", emptySet())
-
-
-        sessionSet?.forEach() { sessionString ->
+        sessionSet?.forEach { sessionString ->
             val parts = sessionString.split("|")
             if (parts.size == 2) {
                 sessionList.add(Session(parts[0], parts[1]))

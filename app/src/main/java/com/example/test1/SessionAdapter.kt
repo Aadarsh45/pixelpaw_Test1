@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-
 class SessionAdapter(private val sessionList: List<Session>) : RecyclerView.Adapter<SessionAdapter.SessionViewHolder>() {
 
     class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -22,11 +21,10 @@ class SessionAdapter(private val sessionList: List<Session>) : RecyclerView.Adap
     override fun onBindViewHolder(holder: SessionViewHolder, position: Int) {
         val session = sessionList[position]
         holder.sessionTimestamp.text = "Login time: ${session.timestamp}"
-        holder.sessionDetail.text = "Session ${Math.abs((sessionList.size - position) ) }"
+        holder.sessionDetail.text = "Session ${sessionList.size - position }"
     }
 
     override fun getItemCount(): Int {
         return sessionList.size
     }
 }
-
